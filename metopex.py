@@ -1,6 +1,6 @@
 #OPEX 파일 DB 투입기
-#v5. 230121
-#v5 :
+#v6. 230121
+#
 #메모리가 터졌으니.. DB를 먼저 쌓고 # ok
 #파일 1개씩 열어
 #시트별로 DB에 올리고 동시에 메모리는 반환
@@ -11,7 +11,10 @@ import os
 import glob
 import time
 
-# 전역변수부
+import pymysql
+from sqlalchemy import create_engine
+pymysql.install_as_MySQLdb()
+import MySQLdb
 
 # I. 파일 리스트 인식
 def rec():
@@ -95,10 +98,6 @@ def cirSheet(fileName, tableName):
         i+=1
 
 #III. DB Insert부
-import pymysql
-from sqlalchemy import create_engine
-pymysql.install_as_MySQLdb()
-import MySQLdb
 
 def insert(df, tableName):
 
@@ -154,7 +153,7 @@ def cirFile(exl_list):
 #IV. 실행부
 if(__name__=="__main__"):      
 
-    #전역변수
+    #전역변수부
     programBeginTime = time.time()
 
     print("OPEX 작업개시...")
